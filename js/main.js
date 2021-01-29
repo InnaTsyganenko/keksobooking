@@ -8,6 +8,7 @@ function getRandomInt(min, max) { // Источник MDN
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+getRandomInt();
 
 function getRandomFloat(min, max, precision) {
   if (min > max) {
@@ -17,3 +18,4 @@ function getRandomFloat(min, max, precision) {
   }
   return ((Math.random() * (max - min)) + min).toPrecision(precision + 1);
 }
+getRandomFloat();
