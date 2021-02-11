@@ -1,7 +1,7 @@
-const TYPE = ['palace', 'flat', 'house', 'bungalow'];
-const CHECKIN = ['12:00', '13:00', '14:00'];
-const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+const TYPES_OF_HOUSING = ['palace', 'flat', 'house', 'bungalow'];
+const CHECKIN_CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
+const HOUSING_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const PHOTOS_OF_HOUSING = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 const SIMILAR_AD_COUNT = 10;
 
 const getRandomInt = function (min, max) { // Источник MDN
@@ -21,18 +21,18 @@ const getRandomFloat = function (min, max, precision) {
     min = max;
     max = temp;
   }
-  return ((Math.random() * (max - min)) + min).toPrecision(precision + 1);
+  return ((Math.random() * (max - min)) + min).toFixed(precision);
 }
 
 const getRandomArrayElements = function (arr, count) {
-  let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+  let shuffledArr = arr.slice(0), i = arr.length, min = i - count, temp, index;
   while (i-- > min) {
     index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
+    temp = shuffledArr[index];
+    shuffledArr[index] = shuffledArr[i];
+    shuffledArr[i] = temp;
   }
-  return shuffled.slice(min);
+  return shuffledArr.slice(min);
 }
 
 const createAd = () => {
@@ -42,22 +42,22 @@ const createAd = () => {
     },
     offer: {
       title: 'Title Ad',
-      address: getRandomFloat(35.65000, 35.70000, 6).toString() + ', ' + getRandomFloat(139.70000, 139.80000, 6).toString(),
+      address: getRandomFloat(35.65000, 35.70000, 5).toString() + ', ' + getRandomFloat(139.70000, 139.80000, 5).toString(),
       price: getRandomInt(500, 1000000),
-      type: TYPE[getRandomInt(0, TYPE.length - 1)],
+      type: TYPES_OF_HOUSING[getRandomInt(0, TYPES_OF_HOUSING.length - 1)],
       rooms: getRandomInt(1, 10),
       guests: getRandomInt(1, 100),
-      checkin: CHECKIN[getRandomInt(0, CHECKIN.length - 1)],
-      checkout: CHECKIN[getRandomInt(0, CHECKIN.length - 1)],
-      features: getRandomArrayElements(FEATURES, getRandomInt(1, 6)),
+      checkin: CHECKIN_CHECKOUT_HOURS[getRandomInt(0, CHECKIN_CHECKOUT_HOURS.length - 1)],
+      checkout: CHECKIN_CHECKOUT_HOURS[getRandomInt(0, CHECKIN_CHECKOUT_HOURS.length - 1)],
+      features: getRandomArrayElements(HOUSING_FEATURES, getRandomInt(1, 6)),
       description: 'Description',
-      photos: PHOTOS[getRandomInt(0, PHOTOS.length - 1)],
+      photos: PHOTOS_OF_HOUSING[getRandomInt(0, PHOTOS_OF_HOUSING.length - 1)],
     },
     location: {
-      x: getRandomFloat(35.65000, 35.70000, 6),
-      y: getRandomFloat(139.70000, 139.80000, 6),
+      x: getRandomFloat(35.65000, 35.70000, 5),
+      y: getRandomFloat(139.70000, 139.80000, 5),
     },
   };
 };
 const similarAd = new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
-similarAd;
+console.log(similarAd);
