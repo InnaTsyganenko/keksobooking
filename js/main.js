@@ -25,7 +25,11 @@ const getRandomFloat = function (min, max, precision) {
 }
 
 const getRandomArrayElements = function (arr, count) {
-  let shuffledArr = arr.slice(0), i = arr.length, min = i - count, temp, index;
+  const shuffledArr = arr.slice(0);
+  let i = arr.length;
+  let min = i - count;
+  let temp;
+  let index;
   while (i-- > min) {
     index = Math.floor((i + 1) * Math.random());
     temp = shuffledArr[index];
