@@ -24,19 +24,9 @@ const getRandomFloat = function (min, max, precision) {
   return ((Math.random() * (max - min)) + min).toFixed(precision);
 }
 
-const getRandomArrayElements = function (arr, count) {
-  const shuffledArr = arr.slice(0);
-  let i = arr.length;
-  let min = i - count;
-  let temp;
-  let index;
-  while (i-- > min) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffledArr[index];
-    shuffledArr[index] = shuffledArr[i];
-    shuffledArr[i] = temp;
-  }
-  return shuffledArr.slice(min);
+const getRandomArrayElements = function (arr) {
+  // eslint-disable-next-line no-undef
+  return _.sampleSize(arr, getRandomInt(1, arr.length - 1));
 }
 
 const createAd = () => {
@@ -53,7 +43,7 @@ const createAd = () => {
       guests: getRandomInt(1, 100),
       checkin: CHECKIN_CHECKOUT_HOURS[getRandomInt(0, CHECKIN_CHECKOUT_HOURS.length - 1)],
       checkout: CHECKIN_CHECKOUT_HOURS[getRandomInt(0, CHECKIN_CHECKOUT_HOURS.length - 1)],
-      features: getRandomArrayElements(HOUSING_FEATURES, getRandomInt(1, 6)),
+      features: getRandomArrayElements(HOUSING_FEATURES),
       description: 'Description',
       photos: PHOTOS_OF_HOUSING[getRandomInt(0, PHOTOS_OF_HOUSING.length - 1)],
     },
