@@ -34,4 +34,21 @@ const getRandomArrayElements = function (arr) {
   return (shuffledArr.slice(min));
 }
 
-export {getRandomInt, getRandomFloat, getRandomArrayElements};
+let makeElement = function (tagName, className, text) {
+  let element = document.createElement(tagName);
+  element.classList.add(className);
+  if (text) {
+    element.textContent = text;
+  }
+  return element;
+};
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+export {getRandomArrayElements, isEscEvent, isEnterEvent, getRandomInt, getRandomFloat, makeElement};
