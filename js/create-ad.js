@@ -5,7 +5,7 @@ const TYPES_OF_HOUSING_DICT = {palace: 'Дворец', flat: 'Квартира',
 const CHECKIN_CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 const HOUSING_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS_OF_HOUSING = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-const SIMILAR_AD_COUNT = 1;
+const SIMILAR_AD_COUNT = 10;
 
 const createAd = () => {
   return {
@@ -15,7 +15,7 @@ const createAd = () => {
     offer: {
       title: 'TitleAd',
       address: getRandomFloat(35.65000, 35.70000, 5).toString() + ', ' + getRandomFloat(139.70000, 139.80000, 5).toString(),
-      price: getRandomInt(500, 100000).toString() + ' ₽/ночь',
+      price: getRandomInt(500, 10000).toString() + ' ₽/ночь',
       type: TYPES_OF_HOUSING[getRandomInt(0, TYPES_OF_HOUSING.length - 1)],
       rooms:  getRandomInt(1, 10).toString() + ' комнаты для ',
       guests: getRandomInt(1, 10).toString() + ' гостей',
