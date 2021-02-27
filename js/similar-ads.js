@@ -1,15 +1,13 @@
+/* eslint-disable no-undef */
+import {getRandomFloat, makeElement} from './util.js';
 import {createAds, TYPES_OF_HOUSING_DICT} from './create-ad.js';
-import {makeElement} from './util.js';
+import {mapCanvas} from './map.js';
 
 const adTemplate = document.querySelector('#card').content;
-const map = document.querySelector('#map-canvas');
-
 const similarAds = createAds;
-const closeButton = '<button class="popup__close" type="button">×</button>';
 
 similarAds.forEach((ad) => {
   const adElement = adTemplate.cloneNode(true);
-  adElement.querySelector('.popup').insertAdjacentHTML('afterbegin',closeButton);
   adElement.querySelector('.popup__title').textContent = ad.offer.title;
   ad.offer.title == 0 ? adElement.querySelector('.popup__title').classList.add('hidden') : null;
   adElement.querySelector('.popup__text--address').textContent = ad.offer.address;
@@ -44,7 +42,28 @@ similarAds.forEach((ad) => {
     adElement.querySelector('.popup__photos').appendChild(clonePhoto);
   }
   ad.offer.photos.length == 0 ? adElement.querySelector('.popup__photos').classList.add('hidden') : null;
-  map.appendChild(adElement);
-});
+  const popup = makeElement('div', 'map__card');
+  popup.appendChild(adElement);
 
-// export {userModalElement, userModalCloseElement};
+  const icon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const marker = L.marker(
+    {
+      lat: getRandomFloat(35.62000, 35.80000, 5).toString(),
+      lng: getRandomFloat(139.60000, 139.80000, 5).toString(),
+    },
+    {
+      icon,
+    },
+  );
+
+  marker
+    .addTo(mapCanvas)
+    .bindPopup(
+      popup,
+    );
+});

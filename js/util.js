@@ -34,8 +34,8 @@ const getRandomArrayElements = function (arr) {
   return (shuffledArr.slice(min));
 }
 
-let makeElement = function (tagName, className, text) {
-  let element = document.createElement(tagName);
+const makeElement = function (tagName, className, text) {
+  const element = document.createElement(tagName);
   element.classList.add(className);
   if (text) {
     element.textContent = text;
