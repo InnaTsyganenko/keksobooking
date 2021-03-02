@@ -1,38 +1,4 @@
-const getRandomInt = function (min, max) { // Источник MDN
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  if (min > max) {
-    let temp = min;
-    min = max;
-    max = temp;
-  }
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const getRandomFloat = function (min, max, precision) {
-  if (min > max) {
-    let temp = min;
-    min = max;
-    max = temp;
-  }
-  return ((Math.random() * (max - min)) + min).toFixed(precision);
-}
-
-const getRandomArrayElements = function (arr) {
-  const shuffledArr = arr.slice(0);
-  const count = getRandomInt(1, arr.length - 1);
-  let i = arr.length;
-  let min = i - count;
-  let temp;
-  let index;
-  while (i-- > min) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffledArr[index];
-    shuffledArr[index] = shuffledArr[i];
-    shuffledArr[i] = temp;
-  }
-  return (shuffledArr.slice(min));
-}
+const ALERT_SHOW_TIME = 5000;
 
 const makeElement = function (tagName, className, text) {
   const element = document.createElement(tagName);
@@ -47,8 +13,29 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
-const isEnterEvent = (evt) => {
-  return evt.key === 'Enter';
-};
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'fixed';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '26px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'tomato';
+  alertContainer.style.color = 'white';
+  alertContainer.textContent = message;
 
-export {getRandomArrayElements, isEscEvent, isEnterEvent, getRandomInt, getRandomFloat, makeElement};
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+const isInPage = function (node) {
+  return (node === document.body) ? false : document.body.contains(node);
+}
+
+export {makeElement, isEscEvent, showAlert, isInPage};
