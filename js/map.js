@@ -31,7 +31,7 @@ const mapCanvas = L.map('map-canvas')
   .setView({
     lat: 35.6919085784612,
     lng: 139.7518350691999,
-  }, 11);
+  }, 10);
 
 
 L.tileLayer(
@@ -72,4 +72,4 @@ mainPinMarker.on('move', () => {
   inputAddress.value = getLatLngFix(mainPinMarker, 5);
 });
 
-export {mapCanvas};
+export {adForm, mapCanvas, mapFilters, mainPinMarker};
