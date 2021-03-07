@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import {adForm, mapFilters} from './ad-form.js';
 
-const latCenter = 35.6919085784612;
-const lngCenter = 139.7518350691999;
+const LAT_CENTER = 35.7919085784612;
+const LNG_CENTER = 139.7518350691999;
 
 adForm.classList.add('ad-form--disabled');
 document.querySelectorAll('.ad-form > *').forEach(function(item){
@@ -26,9 +26,9 @@ const mapCanvas = L.map('map-canvas')
 
   })
   .setView({
-    lat: latCenter,
-    lng: lngCenter,
-  }, 8);
+    lat: LAT_CENTER,
+    lng: LNG_CENTER,
+  }, 9);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -45,8 +45,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: latCenter,
-    lng: lngCenter,
+    lat: LAT_CENTER,
+    lng: LNG_CENTER,
   },
   {
     draggable: true,
@@ -68,4 +68,4 @@ mainPinMarker.on('move', () => {
   inputAddress.value = getLatLngFix(mainPinMarker, 5);
 });
 
-export {mapCanvas, mainPinMarker, latCenter, lngCenter};
+export {mapCanvas, mainPinMarker, LAT_CENTER, LNG_CENTER};

@@ -1,5 +1,5 @@
 import {isInPage, isEscEvent} from './util.js';
-import {mainPinMarker, latCenter, lngCenter} from './map.js';
+import {mainPinMarker, LAT_CENTER, LNG_CENTER} from './map.js';
 import {sendData} from './api.js';
 
 const adForm = document.querySelector('.ad-form');
@@ -8,7 +8,7 @@ const mapFilters = document.querySelector('.map__filters');
 const resetDataForms = () => {
   adForm.reset();
   mapFilters.reset();
-  mainPinMarker.setLatLng([latCenter, lngCenter]);
+  mainPinMarker.setLatLng([LAT_CENTER, LNG_CENTER]);
 };
 
 const setAdFormSubmit = (onSuccess) => {
@@ -37,12 +37,20 @@ const showSuccessMessage = () => {
     main.querySelector('.success').classList.add('hidden');
   });
 
-  main.addEventListener('keydown', (evt) => {
+  const successMessage = main.querySelector('.success');
+
+  main.addEventListener('click', () => {
+    successMessage.classList.add('hidden');
+  });
+
+  const onSuccessEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
-      main.querySelector('.success').classList.add('hidden');
+      successMessage.classList.add('hidden');
+      main.removeEventListener('keydown', onSuccessEscKeydown);
     }
-  });
+  };
+  main.addEventListener('keydown', onSuccessEscKeydown);
 };
 
 const showErrorMessage = () => {
@@ -52,16 +60,20 @@ const showErrorMessage = () => {
   const errorMessageElement = errorMessageTemplate.cloneNode(true);
   main.appendChild(errorMessageElement);
 
+  const errorMessage = main.querySelector('.error');
+
   main.addEventListener('click', () => {
-    main.querySelector('.error').classList.add('hidden');
+    errorMessage.classList.add('hidden');
   });
 
-  main.addEventListener('keydown', (evt) => {
+  const onErrorEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
-      main.querySelector('.error').classList.add('hidden');
+      errorMessage.classList.add('hidden');
+      main.removeEventListener('keydown', onErrorEscKeydown);
     }
-  });
+  };
+  main.addEventListener('keydown', onErrorEscKeydown);
 };
 
 const resetButton = document.querySelector('.ad-form__reset');

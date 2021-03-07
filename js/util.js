@@ -38,4 +38,17 @@ const isInPage = function (node) {
   return (node === document.body) ? false : document.body.contains(node);
 };
 
-export {makeElement, isEscEvent, showAlert, isInPage};
+const debounce = (cb, wait) => {
+  return function (timeout) {
+    const context = this;
+    const args = arguments;
+    const later = function() {
+      timeout = null;
+      cb.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+export {makeElement, isEscEvent, showAlert, isInPage, debounce};

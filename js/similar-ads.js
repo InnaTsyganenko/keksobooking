@@ -69,7 +69,6 @@ const renderSimilarList = (similarAds) => {
         .bindPopup(
           popup,
         );
-
     });
 };
 

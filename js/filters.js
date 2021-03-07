@@ -1,37 +1,23 @@
-import {isInPage, isEscEvent} from './util.js';
+import {isInPage, isEscEvent, debounce} from './util.js';
 import {renderSimilarList} from './similar-ads.js';
 
 const RERENDER_DELAY = 500;
 
 const leafletPane = document.querySelector('.leaflet-pane');
-const leafletAllMarkers = leafletPane.querySelector('.leaflet-marker-pane');
+const leafletAllMarkers = document.querySelector('.leaflet-marker-pane');
+const leafletMarkerDraggable = leafletPane.querySelector('.leaflet-marker-draggable');
+const copyAllAds = JSON.parse(localStorage.getItem('copy_of_ads'));
+const selectHousingType = document.querySelector('[name="housing-type"]');
 
 leafletAllMarkers.addEventListener('keydown', (evt) => {
   const leafletPopup = leafletPane.querySelector('.leaflet-popup');
   if (isEscEvent(evt)) {
     evt.preventDefault();
     if (isInPage(leafletPopup)) {
-      leafletPopup.classList.add('hidden');
+      document.querySelector('.leaflet-popup-close-button').click()
     }
   }
 });
-
-const debounce = (cb, wait) => {
-  return function (timeout) {
-    const context = this;
-    const args = arguments;
-    const later = function() {
-      timeout = null;
-      cb.apply(context, args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-};
-
-const leafletMarkerDraggable = leafletPane.querySelector('.leaflet-marker-draggable');
-const copyAllAds = JSON.parse(localStorage.getItem('copy_of_ads'));
-const selectHousingType = document.querySelector('[name="housing-type"]');
 
 selectHousingType.addEventListener('change', (evt) => {
   const selectHousingTypeOption = evt.target.value;
