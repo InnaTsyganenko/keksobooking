@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
+import {adForm, mapFilters} from './ad-form.js';
 
-const adForm = document.querySelector('.ad-form');
+const LAT_CENTER = 35.7919085784612;
+const LNG_CENTER = 139.7518350691999;
+
 adForm.classList.add('ad-form--disabled');
-
 document.querySelectorAll('.ad-form > *').forEach(function(item){
   item.disabled=true;
 })
 
-const mapFilters = document.querySelector('.map__filters');
 mapFilters.classList.add('map__filters--disabled');
 
 document.querySelectorAll('.map__filters > *').forEach(function(item){
@@ -22,17 +23,12 @@ const mapCanvas = L.map('map-canvas')
       item.disabled=false;
     })
 
-    mapFilters.classList.remove('map__filters--disabled');
 
-    document.querySelectorAll('.map__filters > *').forEach(function(item){
-      item.disabled=false;
-    })
   })
   .setView({
-    lat: 35.6919085784612,
-    lng: 139.7518350691999,
-  }, 10);
-
+    lat: LAT_CENTER,
+    lng: LNG_CENTER,
+  }, 9);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -49,8 +45,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.6919085784612,
-    lng: 139.7518350691999,
+    lat: LAT_CENTER,
+    lng: LNG_CENTER,
   },
   {
     draggable: true,
@@ -72,4 +68,4 @@ mainPinMarker.on('move', () => {
   inputAddress.value = getLatLngFix(mainPinMarker, 5);
 });
 
-export {adForm, mapCanvas, mapFilters, mainPinMarker};
+export {mapCanvas, mainPinMarker, LAT_CENTER, LNG_CENTER};

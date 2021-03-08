@@ -15,7 +15,7 @@ const isEscEvent = (evt) => {
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = 1000;
   alertContainer.style.position = 'fixed';
   alertContainer.style.left = 0;
   alertContainer.style.top = 0;
@@ -32,10 +32,23 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
+};
 
 const isInPage = function (node) {
   return (node === document.body) ? false : document.body.contains(node);
-}
+};
 
-export {makeElement, isEscEvent, showAlert, isInPage};
+const debounce = (cb, wait) => {
+  return function (timeout) {
+    const context = this;
+    const args = arguments;
+    const later = function() {
+      timeout = null;
+      cb.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+export {makeElement, isEscEvent, showAlert, isInPage, debounce};
