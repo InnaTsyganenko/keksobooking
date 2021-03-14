@@ -11,7 +11,7 @@ import {mapFilters} from './ad-form.js';
 getData((ads) => {
   renderSimilarList(ads);
   mapFilters.classList.remove('map__filters--disabled');
-  document.querySelectorAll('.map__filters > *').forEach(function(item){
+  document.querySelectorAll('.map__filters > *').forEach((item) => {
     item.disabled=false;
   })
 });

@@ -1,6 +1,7 @@
 import {isInPage, isEscEvent} from './util.js';
 import {mainPinMarker, LAT_CENTER, LNG_CENTER} from './map.js';
 import {sendData} from './api.js';
+import {renderSimilarList} from './similar-ads.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -9,6 +10,7 @@ const resetDataForms = () => {
   adForm.reset();
   mapFilters.reset();
   mainPinMarker.setLatLng([LAT_CENTER, LNG_CENTER]);
+  renderSimilarList(JSON.parse(localStorage.getItem('copy_of_ads')));
 };
 
 const setAdFormSubmit = (onSuccess) => {
