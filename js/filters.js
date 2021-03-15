@@ -1,6 +1,6 @@
 import {isInPage, isEscEvent, debounce} from './util.js';
 import {renderSimilarList} from './similar-ads.js';
-import {mapFilters} from './ad-form.js';
+import {mapFilters} from './ad-form-notification.js';
 
 const RERENDER_DELAY = 500;
 
@@ -32,23 +32,23 @@ const renderAds = (cb) => {
   return renderSimilarListDebounced(cb);
 };
 
-let selectedOption = [];
+let selectedOptions = [];
 
 const matchHousingFeatures = (arr, target) => {
   return (target.every((v) => arr.includes(v)));
 };
 
 mapFilters.addEventListener('change', () => {
-  selectedOption = selects.map(option => option.value);
+  selectedOptions = selects.map(option => option.value);
   let checkboxValues = [];
   checkboxesHousingFeatures.forEach((checkbox) => {
     checkbox.checked ? checkboxValues.push(checkbox.value) : null;
   });
   const filterPins = copyAllAds.filter((el) =>
-    (selectedOption[0] == 'any' ? true : (el.offer.type == selectedOption[0])) &&
-    (selectedOption[1] == 'any' ? true : (definePrice(el.offer.price))) &&
-    (selectedOption[2] == 'any' ? true : (el.offer.rooms == selectedOption[2])) &&
-    (selectedOption[3] == 'any' ? true : (el.offer.guests == selectedOption[3])) &&
+    (selectedOptions[0] == 'any' ? true : (el.offer.type == selectedOptions[0])) &&
+    (selectedOptions[1] == 'any' ? true : (definePrice(el.offer.price))) &&
+    (selectedOptions[2] == 'any' ? true : (el.offer.rooms == selectedOptions[2])) &&
+    (selectedOptions[3] == 'any' ? true : (el.offer.guests == selectedOptions[3])) &&
     matchHousingFeatures(el.offer.features, checkboxValues),
   );
   renderAds(filterPins);
@@ -63,7 +63,7 @@ const definePrice = (price) => {
   let isPriceRequired;
   let lowPrice;
   let highPrice;
-  switch (selectedOption[1]) {
+  switch (selectedOptions[1]) {
     case 'middle':
       splitMiddle = selectPriceText.split('-');
       min = parseInt(splitMiddle[0].replace(/[^\d]/g, ''));

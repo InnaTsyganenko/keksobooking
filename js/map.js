@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import {adForm, mapFilters} from './ad-form.js';
+import {adForm, mapFilters} from './ad-form-notification.js';
 
 const LAT_CENTER = 35.7919085784612;
 const LNG_CENTER = 139.7518350691999;
