@@ -1,7 +1,6 @@
-import {adForm} from './ad-form-notification.js';
-
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+const adForm = document.querySelector('.ad-form');
 const avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = adForm.querySelector('.ad-form-header__preview');
 
@@ -72,3 +71,5 @@ const previewFile = (file) => {
   reader.readAsDataURL(file);
   reader.onloadend = appendImg;
 };
+
+export {adForm, avatarPreview};

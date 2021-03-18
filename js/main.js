@@ -14,6 +14,6 @@ getData((ads) => {
   renderSimilarList(ads);
   mapFilters.classList.remove('map__filters--disabled');
   document.querySelectorAll('.map__filters > *').forEach((item) => {
-    item.disabled=false;
+    item.disabled = false;
   })
 });

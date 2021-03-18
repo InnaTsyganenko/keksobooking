@@ -16,7 +16,6 @@ inputType.addEventListener('input', () => {
 
 const typeSelect = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
-const typeSelectValue = typeSelect.options[typeSelect.selectedIndex].value;
 
 const MinPrice = {
   bungalow: 0,
@@ -24,9 +23,6 @@ const MinPrice = {
   house: 5000,
   palace: 10000,
 };
-
-priceInput.placeholder = MinPrice[typeSelectValue];
-priceInput.setAttribute('min', MinPrice[typeSelectValue]);
 
 const updatePrice = (evt) => {
   const price = MinPrice[evt.target.value];

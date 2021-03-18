@@ -5,25 +5,23 @@ const LAT_CENTER = 35.7919085784612;
 const LNG_CENTER = 139.7518350691999;
 
 adForm.classList.add('ad-form--disabled');
-document.querySelectorAll('.ad-form > *').forEach(function(item){
-  item.disabled=true;
+document.querySelectorAll('.ad-form > *').forEach((item) => {
+  item.disabled = true;
 })
 
 mapFilters.classList.add('map__filters--disabled');
 
-document.querySelectorAll('.map__filters > *').forEach(function(item){
-  item.disabled=true;
+document.querySelectorAll('.map__filters > *').forEach((item) => {
+  item.disabled = true;
 })
 
 const mapCanvas = L.map('map-canvas')
   .on('load', () => {
     adForm.classList.remove('ad-form--disabled');
 
-    document.querySelectorAll('.ad-form > *').forEach(function(item){
-      item.disabled=false;
+    document.querySelectorAll('.ad-form > *').forEach((item) => {
+      item.disabled = false;
     })
-
-
   })
   .setView({
     lat: LAT_CENTER,
@@ -59,7 +57,7 @@ mainPinMarker.addTo(mapCanvas);
 const getLatLngFix = function (pinMarker, fixed) {
   pinMarker = pinMarker.getLatLng().lat.toFixed(fixed).toString() + ' ' + pinMarker.getLatLng().lng.toFixed(fixed).toString();
   return pinMarker;
-}
+};
 
 const inputAddress = document.querySelector('#address');
 
