@@ -293,11 +293,11 @@ fieldset {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-
+  justify-content: center;
   margin-right: 10px;
   padding: 0 15px;
 
-  width: 70px;
+  min-width: 70px;
   height: 70px;
 
   text-align: center;
@@ -330,6 +330,10 @@ fieldset {
   border-radius: 5px;
 
   cursor: pointer;
+}
+
+.ad-form-header__drop-zone.highlight {
+  border-color: #ff5635;
 }
 
 .ad-form-header__drop-zone:hover {
@@ -561,6 +565,10 @@ fieldset {
 
 .ad-form__drop-zone:hover {
   color: #ff5635;
+}
+
+.ad-form__drop-zone.highlight {
+  border-color: #ff5635;
 }
 
 .ad-form__drop-zone:focus,

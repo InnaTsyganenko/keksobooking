@@ -2,8 +2,9 @@ import {isInPage, isEscEvent} from './util.js';
 import {mainPinMarker, LAT_CENTER, LNG_CENTER} from './map.js';
 import {sendData} from './api.js';
 import {renderSimilarList} from './similar-ads.js';
+import {adForm} from './ad-form-upload-avatar.js';
+import {avatarPreview} from './ad-form-upload-avatar.js';
 
-const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 
 const resetDataForms = () => {
@@ -11,6 +12,8 @@ const resetDataForms = () => {
   mapFilters.reset();
   mainPinMarker.setLatLng([LAT_CENTER, LNG_CENTER]);
   renderSimilarList(JSON.parse(localStorage.getItem('copy_of_ads')));
+  avatarPreview.innerHTML = '';
+  avatarPreview.innerHTML = '<img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">';
 };
 
 const setAdFormSubmit = (onSuccess) => {
