@@ -50,29 +50,27 @@ syncTime(timeinSelect, timeoutSelect);
 
 const roomSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
-const roomSelectValue = roomSelect.options[roomSelect.selectedIndex].value;
-capacitySelect.value = roomSelectValue;
-Array.prototype.filter.call(capacitySelect.options, o => o.value !== '1').forEach(e => (e.disabled = true));
+const capacityOptions = capacitySelect.options;
+Array.from(capacityOptions, o => o.value == '1').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
 
 const conformCapacity = (evt) => {
-  Array.prototype.filter.call(capacitySelect.options, o => o.value).forEach(e => (e.disabled = false));
-
+  Array.from(capacityOptions).forEach((e) => (e = e.disabled = false));
   switch (evt.target.value) {
     case '1':
       capacitySelect.value = evt.target.value;
-      Array.prototype.filter.call(capacitySelect.options, o => o.value !== '1').forEach(e => (e.disabled = true));
+      Array.from(capacityOptions, o => o.value == '1').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
       break;
     case '2':
       capacitySelect.value = evt.target.value;
-      Array.prototype.filter.call(capacitySelect.options, o => (o.value !== '1') && (o.value !== '2')).forEach(e => (e.disabled = true));
+      Array.from(capacityOptions, o => (o.value == '1') || (o.value == '2')).forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
       break;
     case '3':
       capacitySelect.value = evt.target.value;
-      Array.prototype.filter.call(capacitySelect.options, o => (o.value !== '1') && (o.value !== '2') && (o.value !== '3')).forEach(e => (e.disabled = true));
+      Array.from(capacityOptions, o => (o.value == '1') || (o.value == '2') || (o.value == '3')).forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
       break;
     case '100':
       capacitySelect.value = '0';
-      Array.prototype.filter.call(capacitySelect.options, o => o.value !== '0').forEach(e => (e.disabled = true));
+      Array.from(capacityOptions, o => o.value == '0').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
       break;
   }
 };
