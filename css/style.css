@@ -567,6 +567,27 @@ fieldset {
   color: #ff5635;
 }
 
+.ad-form__drop-zone:hover:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  padding: 5px 10px;
+  margin: 50px 0 0 0;
+  background: #ff5635;
+  color: white;
+  border-radius: 3px;
+}
+
+.ad-form__drop-zone:hover:after {
+  content: '';
+  position: absolute;
+  margin: 25px 0 0 0;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-right: 10px solid #ff5635;
+	border-bottom: 5px solid transparent;
+}
+
 .ad-form__drop-zone.highlight {
   border-color: #ff5635;
 }
@@ -579,6 +600,7 @@ fieldset {
 }
 
 .ad-form__photo {
+  display: inline-flex;
   margin-right: 10px;
   margin-bottom: 10px;
 
@@ -587,6 +609,12 @@ fieldset {
 
   background-color: #e4e4de;
   border-radius: 5px;
+}
+
+.ad-form__photo img {
+  margin-right: 10px;
+  width: auto;
+  max-width: 100px;
 }
 
 .ad-form__element--submit {
