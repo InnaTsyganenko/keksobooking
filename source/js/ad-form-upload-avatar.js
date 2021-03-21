@@ -2,7 +2,7 @@ const adForm = document.querySelector('.ad-form');
 const avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = adForm.querySelector('.ad-form-header__preview');
 
-const handleFilesAvatar = (files) => {
+const handleAvatarImage = (files) => {
   avatarPreview.innerHTML = '';
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
@@ -25,7 +25,7 @@ const handleFilesAvatar = (files) => {
 };
 
 avatarInput.addEventListener('change', () => {
-  handleFilesAvatar(avatarInput.files);
+  handleAvatarImage(avatarInput.files);
 });
 
 /* drag-and-drop housing images */
@@ -37,7 +37,7 @@ const drop = (e) => {
   e.preventDefault();
   const dt = e.dataTransfer;
   const files = dt.files;
-  handleFilesAvatar(files);
+  handleAvatarImage(files);
 }
 
 dropBox.addEventListener('drop', drop, false);

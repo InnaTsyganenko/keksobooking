@@ -3,7 +3,7 @@ import {adForm, preventDefaults} from './ad-form-upload-avatar.js';
 const housingImagesInput = adForm.querySelector('.ad-form__upload input[type=file]');
 const housingImagesPreview = adForm.querySelector('.ad-form__photo');
 
-const handleFilesHousingImages = (files) => {
+const handleHousingImages = (files) => {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     if (!file.type.startsWith('image/')){ continue }
@@ -30,7 +30,7 @@ const handleFilesHousingImages = (files) => {
 };
 
 housingImagesInput.addEventListener('change', () => {
-  handleFilesHousingImages(housingImagesInput.files);
+  handleHousingImages(housingImagesInput.files);
 });
 
 /* drag-and-drop housing images */
@@ -42,7 +42,7 @@ const drop = (evt) => {
   evt.preventDefault();
   const dt = evt.dataTransfer;
   const files = dt.files;
-  handleFilesHousingImages(files);
+  handleHousingImages(files);
 }
 
 dropArea.addEventListener('drop', drop, false);
