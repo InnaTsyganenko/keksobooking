@@ -68,4 +68,4 @@ const unhighlightdropBox = () => {
   dropBox.addEventListener(eventName, unhighlightdropBox, false);
 });
 
-export {adForm, preventDefaults};
+export {adForm, preventDefaults, avatarPreview};
