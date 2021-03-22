@@ -1,14 +1,14 @@
-import {adForm} from './ad-form-notification.js';
+import {adForm} from './map.js';
 
 /* title */
 
-const inputType = adForm.querySelector('#title');
+const titleInput = adForm.querySelector('#title');
 
-inputType.addEventListener('input', () => {
-  if (inputType.validity.tooShort) {
-    inputType.setCustomValidity('I expect text from 30 to 100 characters, darling!');
+titleInput.addEventListener('input', () => {
+  if (titleInput.validity.tooShort) {
+    titleInput.setCustomValidity('I expect text from 30 to 100 characters, darling!');
   } else {
-    inputType.setCustomValidity('');
+    titleInput.setCustomValidity('');
   }
 });
 
@@ -17,7 +17,7 @@ inputType.addEventListener('input', () => {
 const typeSelect = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
 
-const MinPrice = {
+const MinPrices = {
   bungalow: 0,
   flat: 1000,
   house: 5000,
@@ -25,9 +25,9 @@ const MinPrice = {
 };
 
 const updatePrice = (evt) => {
-  const price = MinPrice[evt.target.value];
+  const price = MinPrices[evt.target.value];
   priceInput.setAttribute('min', price);
-  priceInput.placeholder = MinPrice[evt.target.value];
+  priceInput.placeholder = MinPrices[evt.target.value];
 };
 
 typeSelect.addEventListener('change', updatePrice);
@@ -51,26 +51,26 @@ syncTime(timeinSelect, timeoutSelect);
 const roomSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.options;
-Array.from(capacityOptions, o => o.value == '1').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
+Array.from(capacityOptions, option => option.value === '1').forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
 
 const conformCapacity = (evt) => {
-  Array.from(capacityOptions).forEach((e) => (e = e.disabled = false));
+  Array.from(capacityOptions).forEach((isMatchedItem) => (isMatchedItem = isMatchedItem.disabled = false));
   switch (evt.target.value) {
     case '1':
       capacitySelect.value = evt.target.value;
-      Array.from(capacityOptions, o => o.value == '1').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
+      Array.from(capacityOptions, option => option.value === '1').forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
       break;
     case '2':
       capacitySelect.value = evt.target.value;
-      Array.from(capacityOptions, o => (o.value == '1') || (o.value == '2')).forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
+      Array.from(capacityOptions, option => (option.value === '1') || (option.value === '2')).forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
       break;
     case '3':
       capacitySelect.value = evt.target.value;
-      Array.from(capacityOptions, o => (o.value == '1') || (o.value == '2') || (o.value == '3')).forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
+      Array.from(capacityOptions, option => (option.value === '1') || (option.value === '2') || (option.value === '3')).forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
       break;
     case '100':
       capacitySelect.value = '0';
-      Array.from(capacityOptions, o => o.value == '0').forEach((e, i) => ((!e) ? (capacityOptions[i].disabled = true) : null));
+      Array.from(capacityOptions, option => option.value === '0').forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
       break;
   }
 };

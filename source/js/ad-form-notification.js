@@ -1,15 +1,15 @@
 import {isInPage, isEscEvent} from './util.js';
-import {mainPinMarker, LAT_CENTER, LNG_CENTER} from './map.js';
+import {closePopup} from './filters.js';
+import {adForm, mapFilters, mainPinMarker, LAT_CENTER, LNG_CENTER} from './map.js';
 import {sendData} from './api.js';
 import {renderSimilarList} from './similar-ads.js';
-import {avatarPreview, adForm} from './ad-form-upload-avatar.js';
+import {avatarPreview} from './ad-form-upload-avatar.js';
 import {housingImagesPreview} from './ad-form-upload-housing-images.js';
 
-const mapFilters = document.querySelector('.map__filters');
-
-const resetDataForms = () => {
+const resetDataForm = () => {
   adForm.reset();
   mapFilters.reset();
+  closePopup();
   mainPinMarker.setLatLng([LAT_CENTER, LNG_CENTER]);
   renderSimilarList(JSON.parse(localStorage.getItem('copy_of_ads')));
   avatarPreview.innerHTML = '';
@@ -30,7 +30,7 @@ const setAdFormSubmit = (onSuccess) => {
   });
 };
 
-setAdFormSubmit(resetDataForms);
+setAdFormSubmit(resetDataForm);
 
 const main = document.querySelector('main');
 const successMessageTemplate = document.querySelector('#success').content;
@@ -87,7 +87,7 @@ const showErrorMessage = () => {
 const resetButton = document.querySelector('.ad-form__reset');
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  resetDataForms();
+  resetDataForm();
 });
 
 export {setAdFormSubmit, adForm, mapFilters};

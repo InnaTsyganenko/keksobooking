@@ -1,31 +1,30 @@
 import {isInPage, isEscEvent, debounce} from './util.js';
 import {renderSimilarList} from './similar-ads.js';
-import {mapFilters} from './ad-form-notification.js';
+import {mapFilters} from './map.js';
 
 const RERENDER_DELAY = 500;
-
 const leafletPane = document.querySelector('.leaflet-pane');
 const leafletAllMarkers = document.querySelector('.leaflet-marker-pane');
 const leafletMarkerDraggable = leafletPane.querySelector('.leaflet-marker-draggable');
 const copyAllAds = JSON.parse(localStorage.getItem('copy_of_ads'));
-const selects = [...document.querySelectorAll('.map__filter')];
+const selectsMapFilters = [...document.querySelectorAll('.map__filter')];
 const checkboxesHousingFeatures = document.querySelectorAll('.map__checkbox');
 
-const popupClose = () => {
+const closePopup = () => {
   if (isInPage(leafletPane.querySelector('.leaflet-popup'))) {
-    document.querySelector('.leaflet-popup-close-button').click()
+    document.querySelector('.leaflet-popup-close-button').click();
   }
 };
 
 leafletAllMarkers.addEventListener('keydown', (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    popupClose();
+    closePopup();
   }
 });
 
 const renderAds = (cb) => {
-  popupClose();
+  closePopup();
   leafletAllMarkers.innerHTML = '';
   leafletAllMarkers.prepend(leafletMarkerDraggable);
   let renderSimilarListDebounced = debounce(renderSimilarList, RERENDER_DELAY);
@@ -34,22 +33,22 @@ const renderAds = (cb) => {
 
 let selectedOptions = [];
 
-const matchHousingFeatures = (arr, target) => {
+const isMatchHousingFeatures = (arr, target) => {
   return (target.every((v) => arr.includes(v)));
 };
 
 mapFilters.addEventListener('change', () => {
-  selectedOptions = selects.map(option => option.value);
+  selectedOptions = selectsMapFilters.map(option => option.value);
   let checkboxValues = [];
   checkboxesHousingFeatures.forEach((checkbox) => {
     checkbox.checked ? checkboxValues.push(checkbox.value) : null;
   });
   const filterPins = copyAllAds.filter((el) =>
-    (selectedOptions[0] == 'any' ? true : (el.offer.type == selectedOptions[0])) &&
-    (selectedOptions[1] == 'any' ? true : (definePrice(el.offer.price))) &&
-    (selectedOptions[2] == 'any' ? true : (el.offer.rooms == selectedOptions[2])) &&
-    (selectedOptions[3] == 'any' ? true : (el.offer.guests == selectedOptions[3])) &&
-    matchHousingFeatures(el.offer.features, checkboxValues),
+    (selectedOptions[0] === 'any' ? true : (el.offer.type === selectedOptions[0])) &&
+    (selectedOptions[1] === 'any' ? true : (definePrice(el.offer.price))) &&
+    (selectedOptions[2] === 'any' ? true : (el.offer.rooms === Number(selectedOptions[2]))) &&
+    (selectedOptions[3] === 'any' ? true : (el.offer.guests === Number(selectedOptions[3]))) &&
+    isMatchHousingFeatures(el.offer.features, checkboxValues),
   );
   renderAds(filterPins);
 });
@@ -83,3 +82,5 @@ const definePrice = (price) => {
   }
   return isPriceRequired;
 };
+
+export {closePopup};

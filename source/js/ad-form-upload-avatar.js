@@ -1,13 +1,13 @@
-const adForm = document.querySelector('.ad-form');
+import {adForm} from './map.js';
+
 const avatarInput = adForm.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = adForm.querySelector('.ad-form-header__preview');
 
 const handleAvatarImage = (files) => {
-  avatarPreview.innerHTML = '';
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     if (!file.type.startsWith('image/')){ continue }
-
+    avatarPreview.innerHTML = '';
     const img = document.createElement('img');
     img.classList.add('obj');
     img.file = file;
