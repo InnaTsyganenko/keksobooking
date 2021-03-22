@@ -1,4 +1,5 @@
-import {adForm, preventDefaults} from './ad-form-upload-avatar.js';
+import {preventDefaults} from './ad-form-upload-avatar.js';
+import {adForm} from './map.js';
 
 const housingImagesInput = adForm.querySelector('.ad-form__upload input[type=file]');
 const housingImagesPreview = adForm.querySelector('.ad-form__photo');

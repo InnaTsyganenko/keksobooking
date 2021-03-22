@@ -1,6 +1,6 @@
 const ALERT_SHOW_TIME = 5000;
 
-const makeElement = function (tagName, className, text) {
+const makeElement = (tagName, className, text) => {
   const element = document.createElement(tagName);
   element.classList.add(className);
   if (text) {
@@ -34,7 +34,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const isInPage = function (node) {
+const isInPage = (node) => {
   return (node === document.body) ? false : document.body.contains(node);
 };
 
@@ -42,7 +42,7 @@ const debounce = (cb, wait) => {
   return function (timeout) {
     const context = this;
     const args = arguments;
-    const later = function() {
+    const later = () => {
       timeout = null;
       cb.apply(context, args);
     };
