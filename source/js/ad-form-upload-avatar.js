@@ -51,21 +51,21 @@ const preventDefaults = (e) => {
   dropBox.addEventListener(eventName, preventDefaults, false);
 });
 
-const highlightdropBox = () => {
+const highlightDropBox = () => {
   dropBox.classList.add('highlight');
   dropBox.focus();
 };
 
-const unhighlightdropBox = () => {
+const unhighlightDropBox = () => {
   dropBox.classList.remove('highlight');
   dropBox.blur();
 };
 
 ['dragenter', 'dragover'].forEach(eventName => {
-  dropBox.addEventListener(eventName, highlightdropBox, false);
+  dropBox.addEventListener(eventName, highlightDropBox, false);
 });
 ['dragleave', 'drop'].forEach(eventName => {
-  dropBox.addEventListener(eventName, unhighlightdropBox, false);
+  dropBox.addEventListener(eventName, unhighlightDropBox, false);
 });
 
 export {preventDefaults, avatarPreview};
