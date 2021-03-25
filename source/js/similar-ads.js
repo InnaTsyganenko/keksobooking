@@ -6,6 +6,30 @@ const SIMILAR_AD_COUNT = 10;
 const adTemplate = document.querySelector('#card').content;
 const typesHousingDict = {palace: 'Дворец', flat: 'Квартира', house: 'Дом', bungalow: 'Бунгало'};
 
+const renderMarkers = (ad, popup) => {
+  const icon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const marker = L.marker(
+    {
+      lat: ad.location.lat,
+      lng: ad.location.lng,
+    },
+    {
+      icon,
+    },
+  );
+
+  marker
+    .addTo(mapCanvas)
+    .bindPopup(
+      popup,
+    );
+};
+
 const renderSimilarList = (similarAds) => {
   similarAds
     .slice(0, SIMILAR_AD_COUNT)
@@ -47,28 +71,7 @@ const renderSimilarList = (similarAds) => {
       ad.offer.photos.length === 0 ? adElement.querySelector('.popup__photos').classList.add('hidden') : null;
       const popup = makeElement('div', 'map__card');
       popup.appendChild(adElement);
-
-      const icon = L.icon({
-        iconUrl: 'img/pin.svg',
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-      });
-
-      const marker = L.marker(
-        {
-          lat: ad.location.lat,
-          lng: ad.location.lng,
-        },
-        {
-          icon,
-        },
-      );
-
-      marker
-        .addTo(mapCanvas)
-        .bindPopup(
-          popup,
-        );
+      renderMarkers(ad, popup);
     });
 };
 

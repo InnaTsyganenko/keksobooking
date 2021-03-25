@@ -24,13 +24,13 @@ const minPrices = {
   palace: 10000,
 };
 
-const updatePrice = (evt) => {
+const onTypeSelectChange = (evt) => {
   const price = minPrices[evt.target.value];
   priceInput.setAttribute('min', price);
   priceInput.placeholder = minPrices[evt.target.value];
 };
 
-typeSelect.addEventListener('change', updatePrice);
+typeSelect.addEventListener('change', onTypeSelectChange);
 
 /* timein - timeout */
 
@@ -38,9 +38,9 @@ const timeinSelect = adForm.querySelector('#timein');
 const timeoutSelect = adForm.querySelector('#timeout');
 
 const syncTime = () => {
-  const SelectsTime = [timeinSelect, timeoutSelect];
+  const selectsTime = [timeinSelect, timeoutSelect];
   for (let i = 0; i < 2; i++) {
-    SelectsTime[i].addEventListener('change', (evt) => SelectsTime[i^1].value = evt.target.value);
+    selectsTime[i].addEventListener('change', (evt) => selectsTime[i^1].value = evt.target.value);
   }
 };
 
@@ -53,7 +53,7 @@ const capacitySelect = adForm.querySelector('#capacity');
 const capacityOptions = capacitySelect.options;
 Array.from(capacityOptions, option => option.value === '1').forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
 
-const conformCapacity = (evt) => {
+const onCapacitySelectChange = (evt) => {
   Array.from(capacityOptions).forEach((isMatchedItem) => (isMatchedItem = isMatchedItem.disabled = false));
   switch (evt.target.value) {
     case '1':
@@ -75,4 +75,6 @@ const conformCapacity = (evt) => {
   }
 };
 
-roomSelect.addEventListener('change', conformCapacity);
+roomSelect.addEventListener('change', onCapacitySelectChange);
+
+export {priceInput, minPrices, capacityOptions};

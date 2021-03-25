@@ -23,13 +23,12 @@ leafletAllMarkers.addEventListener('keydown', (evt) => {
   }
 });
 
-const renderAds = (cb) => {
+const debouncedRenderAds = debounce((ads) => {
   closePopup();
   leafletAllMarkers.innerHTML = '';
   leafletAllMarkers.prepend(leafletMarkerDraggable);
-  let renderSimilarListDebounced = debounce(renderSimilarList, RERENDER_DELAY);
-  return renderSimilarListDebounced(cb);
-};
+  renderSimilarList(ads);
+}, RERENDER_DELAY);
 
 let selectedOptions = [];
 
@@ -50,7 +49,7 @@ mapFilters.addEventListener('change', () => {
     (selectedOptions[3] === 'any' ? true : (el.offer.guests === Number(selectedOptions[3]))) &&
     isMatchHousingFeatures(el.offer.features, checkboxValues),
   );
-  renderAds(filterPins);
+  debouncedRenderAds(filterPins);
 });
 
 const definePrice = (price) => {

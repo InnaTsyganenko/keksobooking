@@ -38,16 +38,17 @@ const isInPage = (node) => {
   return (node === document.body) ? false : document.body.contains(node);
 };
 
-const debounce = (cb, wait) => {
-  return function (timeout) {
+const debounce = (cb, wait, immediate) => {
+  let timeout;
+  return function executedFunction() {
     const context = this;
     const args = arguments;
-    const later = () => {
+    const setAside = () => {
       timeout = null;
-      cb.apply(context, args);
+      (!immediate) ? cb.apply(context, args) : null;
     };
     clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    timeout = setTimeout(setAside, wait);
   };
 };
 

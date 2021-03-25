@@ -5,6 +5,7 @@ import {sendData} from './api.js';
 import {renderSimilarList} from './similar-ads.js';
 import {avatarPreview} from './ad-form-upload-avatar.js';
 import {housingImagesPreview} from './ad-form-upload-housing-images.js';
+import {priceInput, minPrices, capacityOptions} from './ad-form-validation.js';
 
 const resetDataForm = () => {
   adForm.reset();
@@ -17,6 +18,9 @@ const resetDataForm = () => {
   avatarPreview.innerHTML = '<img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">';
   housingImagesPreview.innerHTML = '';
   housingImagesPreview.style = 'background: #e4e4de';
+  priceInput.setAttribute('min', minPrices['flat']);
+  priceInput.placeholder = minPrices['flat'];
+  Array.from(capacityOptions, option => option.value === '1').forEach((isMatchedItem, index) => ((!isMatchedItem) ? (capacityOptions[index].disabled = true) : null));
 };
 
 const setAdFormSubmit = (onSuccess) => {
